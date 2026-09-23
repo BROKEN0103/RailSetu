@@ -1,32 +1,130 @@
-# React + TypeScript + Vite
+# RailSetu
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Railway Ticket Booking and Management System**
 
-Currently, two official plugins are available:
+RailSetu is a modern railway reservation and management system designed to provide a seamless experience for passengers and administrators.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚆 Project Overview
 
-## React Compiler
+RailSetu provides a complete platform for railway ticket reservation, passenger management, train management, booking management, and administrative operations.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The frontend is built with React and TypeScript and is designed to integrate with a Node.js/Express backend and database layer.
 
-## Expanding the Oxlint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### Passenger
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+* Railway/train search
+* Train details and route information
+* Passenger details management
+* Seat selection
+* Ticket booking
+* Booking review
+* Payment interface
+* PNR status
+* My bookings
+* Ticket/booking details
+* Profile management
+
+### Admin
+
+* Dashboard
+* Train management
+* Station management
+* Schedule management
+* Booking management
+* User management
+* Fare management
+* Reports
+* Audit logs
+
+## 🛠️ Tech Stack
+
+* **Frontend:** React + TypeScript
+* **Build Tool:** Vite
+* **Styling:** CSS / Tailwind CSS
+* **Routing:** React Router
+* **Icons:** Lucide
+* **Backend:** Node.js + Express.js *(planned)*
+* **Database:** PostgreSQL *(planned)*
+
+## 📁 Project Structure
+
+```text
+RailSetu/
+├── public/
+├── src/
+│   ├── api/
+│   ├── components/
+│   ├── context/
+│   ├── data/
+│   ├── layouts/
+│   ├── pages/
+│   │   ├── admin/
+│   │   ├── passenger/
+│   │   └── public/
+│   ├── services/
+│   ├── types/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── router.tsx
+├── package.json
+├── vite.config.ts
+└── README.md
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## ▶️ Running the Frontend
+
+Clone the repository:
+
+```bash
+git clone https://github.com/BROKEN0103/RailSetu.git
+```
+
+Navigate into the project:
+
+```bash
+cd RailSetu
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will then be available through the local development URL shown in the terminal.
+
+## 🔮 Future Development
+
+The frontend will be integrated with the backend to provide:
+
+* User authentication and authorization
+* Train and station APIs
+* Real-time train search
+* Database-driven seat availability
+* Ticket booking
+* Automatic PNR generation
+* Booking cancellation
+* Fare calculation
+* Payment processing
+* RAC/waitlist management
+* Administrative APIs
+* Reports and analytics
+
+## 📌 Project Status
+
+**Frontend:** Completed
+**Backend:** Under development
+**Database:** Planned
+**API Integration:** Planned
+
+## 👨‍💻 Author
+
+**BROKEN0103**
