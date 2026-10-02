@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+const API_URL = "http://localhost:5000/api/v1/auth";
 
 // Basic types for mock context
 export interface User {
@@ -38,23 +39,75 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password?: string) => {
-    // Mock login
-    const isMockAdmin = email.includes('admin');
-    const mockUser: User = {
-      id: isMockAdmin ? 'admin-1' : 'user-1',
-      name: isMockAdmin ? 'System Admin' : 'Demo Passenger',
-      email: email,
-      role: isMockAdmin ? 'admin' : 'passenger',
-    };
-    
-    setUser(mockUser);
-    localStorage.setItem('railconnect_user', JSON.stringify(mockUser));
+  const response = await fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Login failed");
+  }
+
+  const loggedInUser: User = {
+    id: String(result.data.id),
+    name: result.data.name,
+    email: result.data.email,
+    role: result.data.role || "passenger",
   };
 
+  setUser(loggedInUser);
+
+  localStorage.setItem(
+    "railconnect_user",
+    JSON.stringify(loggedInUser)
+  );
+};
+
   const register = async (data: any) => {
-    // Mock register
-    await login(data.email);
-  };
+  const response = await fetch(`${API_URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Registration failed");
+  }
+
+  setUser({
+    id: String(result.data.id),
+    name: result.data.name,
+    email: result.data.email,
+    role: result.data.role || "passenger",
+  });
+
+  localStorage.setItem(
+    "railconnect_user",
+    JSON.stringify({
+      id: String(result.data.id),
+      name: result.data.name,
+      email: result.data.email,
+      role: result.data.role || "passenger",
+    })
+  );
+};
 
   const logout = () => {
     setUser(null);
