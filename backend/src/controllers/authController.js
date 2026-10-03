@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const pool = require("../config/db");
 
 const registerUser = async (req, res) => {
@@ -84,8 +85,23 @@ const loginUser = async (req, res) => {
             });
         }
 
+        // Create JWT token
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+                role: user.role
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1d"
+            }
+        );
+
+        // Send token + user information to frontend
         res.status(200).json({
             message: "Login successful",
+            token: token,
             data: {
                 id: user.id,
                 name: user.full_name,
@@ -103,6 +119,7 @@ const loginUser = async (req, res) => {
         });
     }
 };
+
 module.exports = {
     registerUser,
     loginUser
